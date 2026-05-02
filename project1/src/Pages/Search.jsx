@@ -1,6 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
-import { Building2, Landmark, Building, Home, MapPin} from "lucide-react"
+import React, { useState } from 'react'
+import { Building2, Landmark, Building, Home, MapPin } from 'lucide-react'
 
 function Search() {
     const [search, setSearch] = useState("")
