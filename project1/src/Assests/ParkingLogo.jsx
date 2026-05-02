@@ -1,7 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const ParkNowLogo = ({ primaryColor = "#1B365D", size = "305px" }) => (
+
+const ParkNowLogo = ({ primaryColor = "#1B365D", size = "305px" }) => {
+  let navigate = useNavigate();
+  return (
   <svg 
+  onClick={()=>navigate("/home")}
     width={size} 
     height="auto" 
     viewBox="0 0 450 150" 
@@ -48,7 +53,7 @@ const ParkNowLogo = ({ primaryColor = "#1B365D", size = "305px" }) => (
     >
       PARK NOW
     </text>
-  </svg>
-);
+  </svg>)
+};
 
 export default ParkNowLogo;
