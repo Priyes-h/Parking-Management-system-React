@@ -50,7 +50,7 @@ function Payment() {
       {/* header */}
 
       <header className="w-full max-w-5xl">
-        <div className="bg-gradient-to-r from-sky-500 to-violet-600 text-white rounded-xl p-5 shadow-md flex items-center gap-4">
+        <div className="bg-linear-to-r from-sky-500 to-violet-600 text-white rounded-xl p-5 shadow-md flex items-center gap-4">
           <div className="bg-white/20 rounded-full p-2">
             <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" aria-hidden>
               <path d="M3 12h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -83,19 +83,19 @@ function Payment() {
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full name</label>
               <input id="name" name="Name" type="text" value={data.Name} onChange={handleChange}
-                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="Jane Doe" />
+                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="Rahul sir" />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
               <input id="email" name="Email" type="email" value={data.Email} onChange={handleChange}
-                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="you@example.com" />
+                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="rahulsir@wap.com" />
             </div>
 
             <div className="md:col-span-2">
               <label htmlFor="vehicle" className="block text-sm font-medium text-gray-700">Vehicle number</label>
               <input id="vehicle" name="VehicleNumber" type="text" value={data.VehicleNumber} onChange={handleChange}
-                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="AB12CD3456" />
+                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="UP16HR0001" />
             </div>
           </section>
 
@@ -107,7 +107,7 @@ function Payment() {
             <div className="md:col-span-2">
               <label htmlFor="address" className="block text-sm font-medium text-gray-700">Parking address</label>
               <input id="address" name="ParkingAddress" type="text" value={data.ParkingAddress} onChange={handleChange}
-                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="Street, City, Landmark" />
+                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="Patna, Bihar" />
             </div>
 
             <div>
@@ -137,7 +137,7 @@ function Payment() {
 
           <div className="pt-3">
             <button type="submit"
-              className="w-full inline-flex justify-center items-center gap-2 rounded-lg bg-gradient-to-r from-sky-500 to-violet-600 px-4 py-2 text-white font-semibold shadow hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-400">
+              className="w-full inline-flex justify-center items-center gap-2 rounded-lg bg-linear-to-r from-sky-500 to-violet-600 px-4 py-2 text-white font-semibold shadow hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-400">
               Proceed to Pay
             </button>
           </div>
