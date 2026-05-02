@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 function Home() {
   const [data, setdata] = useState(null)
   const navigate = useNavigate()
-  
+  // fetches data fromapi 
   useEffect(() => {
     fetch("https://api.geoapify.com/v2/places?categories=parking&filter=circle:77.1025,28.7041,5000&apiKey=bc475bb3622d4f59bbf0253052ca93a7")
     .then((res) => res.json())
@@ -14,12 +14,13 @@ function Home() {
     console.log("fetched")
   }, [])
   
-  // 🛑 prevent crash
-  if (!data) return <p>Loading...</p>
+  // 🛑 prevent crash loading 
+  if (!data) return <p>Loading...</p> 
   const loopData = [...data.features, ...data.features];
 
   return (
-    <div>
+    <div> 
+      {/* nearby parking here animation */}
       <h2 className='text-center text-2xl'>Nearby Parking</h2>
       <div className=' w-[90%]  overflow-x-scroll overflow-y-visible ml-[81px] mt-[35px] h-[150px]'>
         <div className=' flex gap-4 animate-scroll items-center'>
