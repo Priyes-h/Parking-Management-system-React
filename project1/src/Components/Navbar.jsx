@@ -8,7 +8,7 @@ function Navbar() {
     {/* // central nav bar div applies flex on logo and links */}
     <div className='flex justify-around border-b border-[#E5E7EB] bg-[#F8FAFC]'> 
       {/* rendering the logo component it is an svg guys  */}
-      <div><ParkNowLogo /></div>
+      <div><ParkNowLogo/></div>
       {/* links here flex appliedn in home about and others  */}
       <div className='flex justify-evenly gap-5 items-center'>
         {/* will include search and apply implement here aysuhmaan */}

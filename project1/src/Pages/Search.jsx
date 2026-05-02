@@ -1,66 +1,56 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Building2, Landmark, Building, Home, MapPin} from "lucide-react"
+import { Building2, Landmark, Building, Home, MapPin,Search} from "lucide-react"
+import { useNavigate } from "react-router-dom";
 
-function Search() {
-    const [search, setSearch] = useState("")
-
-    const cities = [
-    { name: "Mumbai", icon: <Building2 size={36} /> },
-    { name: "Bangalore", icon: <Landmark size={36} /> },
-    { name: "Delhi", icon: <Building size={36} /> },
-    { name: "Pune", icon: <Home size={36} /> },
-    { name: "Hyderabad", icon: <Landmark size={36} /> },
-    { name: "Chennai", icon: <Home size={36} /> },
-    { name: "Kolkata", icon: <Landmark size={36} /> },
-    { name: "Chandigarh", icon: <MapPin size={36} /> }
-  ]
-
-  return (
-    <div className="max-w-4xl mx-auto">
-        <h1 className='text-3xl text-center font-bold mt-4'>
-            Search Your Parking
-        </h1>
-
-        {/* Input section */}
-        <input className='block mx-auto mt-4 border border-gray-700 rounded w-[500px] h-10 '
-        type='text'
-        value={search}
-        placeholder='  park near..'
-        onChange={(e)=> setSearch(e.target.value)}/>
-
-        {/* Find Button */}
-        <button className='block mx-auto mt-4 bg-blue-300 rounded px-4 py-2 w-[200px] h-10 cursor-pointer hover:bg-blue-800 hover:text-white '
-        onClick={() => console.log(search)}>
-            Find Parking
-        </button>
-
-        <h2 className="text-2xl font-semibold mt-10 mb-4 text-center text-gray-800">Popular Cities</h2>
-        
-        {/* City suggesatins */}
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
-            {cities.map((city, idx)=>(
-
-                <div 
-                key={idx}
-                onClick={() => setSearch(city.name)}
-                className="flex flex-col items-center cursor-pointer group">
-
-                    <div className="p-4 rounded-full bg-gray-100 text-gray-500 group-hover:text-green-500 group-hover:bg-green-100 transition">
-                        {city.icon}
-                    </div>
-                    <div className="mt-3 text-gray-700 font-medium group-hover:text-green-600">
-                        {city.name}
-                    </div>
-
-                </div>
-                
-            ))}
-            
-        </div>
-
-    </div>
+function Seearch({data}) {
+    const navigate = useNavigate()
+    let [query,setquery] = useState("")
+     const filteredData = data.filter((place) =>
+    place.properties.formatted
+      ?.toLowerCase()
+      .includes(query.toLowerCase())
   )
-}
+  return (
+   <>
+  <div className="flex justify-center">
+      <div className="relative w-[450px] m-[20px]">
+        
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
 
-export default Search
+        <input
+          value={query}
+          onChange={(e) => setquery(e.target.value)}
+          type="text"
+          placeholder="Search parking address here"
+          className=" placeholder-white w-full h-[55px] pl-10 pr-4 py-3 bg-white dark:bg-gray-800
+                     border border-gray-300 dark:border-gray-600
+                     rounded-lg
+                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                     dark:focus:ring-blue-400 dark:focus:border-blue-400
+                     transition-all duration-200
+                
+                     text-gray-900 dark:text-gray-100
+                     hover:border-gray-400 dark:hover:border-gray-500
+                     shadow-sm"
+        />
+      </div>
+    </div>
+      <div className="flex flex-col items-center gap-3">
+        {query && filteredData.map((place, i) => (
+          <div
+            key={place.properties.place_id || i}
+            onClick={()=>(navigate("/ParkingChoose"))}
+            className="w-[450px] bg-white p-4 rounded-lg shadow hover:shadow-md transition"
+          >
+            <h3>📍 {place.properties.name || "Parking"}</h3>
+            <p>{place.properties.formatted}</p>
+          </div>
+        ))}
+      </div>
+
+</>
+)}
+
+
+export default Seearch
