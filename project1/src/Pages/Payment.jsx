@@ -1,8 +1,14 @@
 
 import React, { useState } from 'react'
 
+
+// parking fees
+
 function Payment() {
   const parking = { fees: 67 }
+
+
+  // form data state
 
   const [data, setData] = useState({
     Name: "",
@@ -13,24 +19,38 @@ function Payment() {
     ParkingSpots: 1,
   })
 
+
+
+  // form data change handler
+
   function handleChange(e) {
     const { name, value } = e.target
     setData(prev => ({ ...prev, [name]: value }))
   }
+
+
+  // form submit handler
 
   function handleSubmit(e) {
     e.preventDefault()
     console.log('submit', data)
   }
 
+  // calculate total fee
+
   const duration = data.ParkingDuration
   const spots = data.ParkingSpots
   const total = parking.fees * duration * spots
 
   return (
+
+    // main container
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4">
+
+      {/* header */}
+
       <header className="w-full max-w-5xl">
-        <div className="bg-gradient-to-r from-sky-500 to-violet-600 text-white rounded-xl p-5 shadow-md flex items-center gap-4">
+        <div className="bg-linear-to-r from-sky-500 to-violet-600 text-white rounded-xl p-5 shadow-md flex items-center gap-4">
           <div className="bg-white/20 rounded-full p-2">
             <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" aria-hidden>
               <path d="M3 12h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -44,35 +64,50 @@ function Payment() {
         </div>
       </header>
 
+
+
+      {/* main content */}
+
       <main className="w-full max-w-5xl mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        {/* booking form */}
         <form onSubmit={handleSubmit} className="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 space-y-6">
+    
           <h2 className="text-2xl font-semibold text-gray-800">Book Your Parking</h2>
 
+
+          {/* form fields */}
           <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full name</label>
               <input id="name" name="Name" type="text" value={data.Name} onChange={handleChange}
-                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="Jane Doe" />
+                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="Rahul sir" />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
               <input id="email" name="Email" type="email" value={data.Email} onChange={handleChange}
-                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="you@example.com" />
+                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="rahulsir@wap.com" />
             </div>
 
             <div className="md:col-span-2">
               <label htmlFor="vehicle" className="block text-sm font-medium text-gray-700">Vehicle number</label>
               <input id="vehicle" name="VehicleNumber" type="text" value={data.VehicleNumber} onChange={handleChange}
-                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="AB12CD3456" />
+                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="UP16HR0001" />
             </div>
           </section>
+
+
+          {/* parking details */}
+
 
           <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="md:col-span-2">
               <label htmlFor="address" className="block text-sm font-medium text-gray-700">Parking address</label>
               <input id="address" name="ParkingAddress" type="text" value={data.ParkingAddress} onChange={handleChange}
-                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="Street, City, Landmark" />
+                className="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-400" placeholder="Patna, Bihar" />
             </div>
 
             <div>
@@ -88,18 +123,29 @@ function Payment() {
             </div>
           </section>
 
+
+        {/* total and submit */}
+        
           <div className="flex items-center justify-between pt-2">
             <div className="text-sm text-gray-600">Parking fee <span className="font-medium text-gray-800">${parking.fees}/hr</span></div>
             <div className="text-lg font-semibold text-gray-900">Total: <span className="ml-2 text-sky-600">${total}</span></div>
           </div>
 
+
+        {/* submit button */}
+
+
           <div className="pt-3">
             <button type="submit"
-              className="w-full inline-flex justify-center items-center gap-2 rounded-lg bg-gradient-to-r from-sky-500 to-violet-600 px-4 py-2 text-white font-semibold shadow hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-400">
+              className="w-full inline-flex justify-center items-center gap-2 rounded-lg bg-linear-to-r from-sky-500 to-violet-600 px-4 py-2 text-white font-semibold shadow hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-400">
               Proceed to Pay
             </button>
           </div>
         </form>
+ 
+ 
+        {/* payment summary */}
+
 
         <aside className="hidden lg:block bg-white rounded-xl shadow-sm p-6 sticky top-6 h-fit">
           <h3 className="text-lg font-semibold text-gray-800 mb-3">Payment Summary</h3>
@@ -129,6 +175,8 @@ function Payment() {
           </div>
         </aside>
       </main>
+
+      {/* footer */}
 
       <footer className="w-full max-w-5xl mt-8 text-center text-sm text-gray-500">
         © ParkingN — Fast & Secure Parking Reservations

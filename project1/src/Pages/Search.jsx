@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React from 'react'
+import { useState,useEffect } from 'react'
 import { Building2, Landmark, Building, Home, MapPin,Search} from "lucide-react"
-import { useNavigate } from "react-router-dom";
 
 function Seearch({data}) {
     const navigate = useNavigate()

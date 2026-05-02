@@ -8,6 +8,7 @@ import Contact from './Pages/Contact'
 import PreviousTrips from './Pages/PreviousTrips'
 import ParkingChoose from './Pages/ParkingChoose'
 import Payment from './Pages/Payment'
+import Footer from './Components/Footer'
 function App() {
 
 
@@ -24,6 +25,7 @@ function App() {
     <Route path='/ParkingChoose' element={<ParkingChoose/>}></Route>
     <Route path='/Payment' element={<Payment/>}></Route>
    </Routes>
+   <Footer/>
     </>
   )
 }
