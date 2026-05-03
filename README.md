@@ -4,6 +4,9 @@ A web-based **Smart Parking Management System** that enables users to seamlessly
 The platform is designed to reduce parking congestion and provide a structured, user-friendly parking experience.
 
 ---
+## 🚀 Live Demo
+
+👉 [Click here to view the app](https://parkknow.netlify.app/)
 
 ## 🚀 Phase 1 Features
 
