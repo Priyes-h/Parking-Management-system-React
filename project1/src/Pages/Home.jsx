@@ -29,40 +29,43 @@ function Home() {
   const loopData = [...data.features, ...data.features];
 
   return (
-    <div> 
+    <div className='px-4 py-6 lg:px-8'> 
       {/* nearby parking here animation */}
-      <h2 className='text-center text-2xl'>Nearby Parking</h2>
-      <div className=' w-[90%]  overflow-x-scroll overflow-y-visible ml-[81px] mt-[35px] h-[150px]'>
-        <div className=' flex gap-4 animate-scroll items-center'>
+      <h2 className='text-center text-2xl font-semibold mb-4'>Nearby Parking</h2>
+      <div className='w-full max-w-6xl mx-auto overflow-x-auto overflow-y-visible mt-4 py-2'>
+        <div className='flex gap-4 animate-scroll items-center'>
+          {loopData.slice(7,19).map((place, i) => (
+            <div key={i} className='min-w-[240px] shrink-0 rounded-3xl bg-white p-4 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl'>
+              <button
+                type='button'
+                onClick={() => {
+                  const selected = {
+                    name: place.properties.name,
+                    lat: place.geometry.coordinates[1],
+                    long: place.geometry.coordinates[0],
+                    capacity: place.properties.datasource?.raw?.capacity || 10,
+                    parkingFee: place.properties.parking?.fee === false ? 'Free' : 67,
+                    parkingType: place.properties.parking?.type || 'general',
+                    formatted: place.properties.formatted,
+                  }
 
-      {loopData.slice(7,19).map((place, i) => (
-        <div className=' bg-white  pt-[35px] bg-red-600  hover:shadow-2xl rounded-xl hover:ring-2 hover:ring-inset hover:ring-fuchsia-300 shadow-[6px_6px_12px_rgba(0,0,0,0.15)]  p-6 transition flex shrink-0 h-[125px] ' > 
-          <div  onClick={() => {
-                        const selected = {
-                          name: place.properties.name,
-                          lat: place.geometry.coordinates[1],
-                          long: place.geometry.coordinates[0],
-                          capacity:  place.properties.datasource?.raw?.capacity || 10,
-                          parkingFee:  place.properties.parking?.fee === false ? "Free" : 67,
-                          parkingType: place.properties.parking?.type || "general",
-                          formatted: place.properties.formatted,
-                        };
+                  setchose(selected)
 
-                        setchose(selected);
-
-                        navigate("/ParkingChoose", {
-                          state: { selected },
-                        });
-}} key={i} className=''>
-          <h3> 📍{place.properties.name || "Parking"}</h3>
-          <p> {place.properties.formatted}</p>
-          </div>
+                  navigate('/ParkingChoose', {
+                    state: { selected },
+                  })
+                }}
+                className='text-left w-full'
+              >
+                <h3 className='text-lg font-semibold mb-2'>📍 {place.properties.name || 'Parking'}</h3>
+                <p className='text-sm text-slate-600'>{place.properties.formatted}</p>
+              </button>
+            </div>
+          ))}
         </div>
-      ))}
       </div>
-      </div>
-      <hr />
-      <Seearch data = {data.features} />
+      <hr className='my-8 border-slate-200' />
+      <Seearch data={data.features} />
     </div>
   )
 }

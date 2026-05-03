@@ -36,77 +36,67 @@ function Seearch({ data }) {
   return (
     <>
       {/* 🔍 Search Input */}
-      <div className="flex justify-center">
-        <div className="relative w-[450px] m-[20px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+      <div className='px-4 py-6'>
+        <div className='relative mx-auto w-full max-w-xl'>
+          <Search className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5' />
 
           <input
             value={query}
             onChange={(e) => setquery(e.target.value)}
-            type="text"
-            placeholder="Search parking address here"
-            className="placeholder-white w-full h-[55px] pl-10 pr-4 py-3 bg-white dark:bg-gray-800
-                       border border-gray-300 dark:border-gray-600
-                       rounded-lg
-                       focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                       dark:focus:ring-blue-400 dark:focus:border-blue-400
-                       transition-all duration-200
-                       text-gray-900 dark:text-gray-100
-                       hover:border-gray-400 dark:hover:border-gray-500
-                       shadow-sm"
+            type='text'
+            placeholder='Search parking address here'
+            className='w-full h-14 pl-12 pr-4 rounded-2xl border border-gray-300 bg-white text-gray-900 shadow-sm transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30'
           />
         </div>
       </div>
 
       {/* 📦 Filtered Results */}
-      <div className="flex flex-col items-center gap-3">
+      <div className='flex flex-col items-center gap-3 px-4 pb-6'>
         {query && filteredData.map((place, i) => (
           <div
             key={place.properties.place_id || i}
-        onClick={() => {
-                        const selected = {
-                          name: place.properties.name,
-                          lat: place.geometry.coordinates[1],
-                          long: place.geometry.coordinates[0],
-                          capacity: place.properties.datasource?.raw?.capacity || 10,
-                          parkingFee: place.properties.parking?.fee === false ? "Free" : 67,
-                          parkingType: place.properties.parking?.type || "general",
-                          formatted: place.properties.formatted,
-                        };
+            onClick={() => {
+              const selected = {
+                name: place.properties.name,
+                lat: place.geometry.coordinates[1],
+                long: place.geometry.coordinates[0],
+                capacity: place.properties.datasource?.raw?.capacity || 10,
+                parkingFee: place.properties.parking?.fee === false ? 'Free' : 67,
+                parkingType: place.properties.parking?.type || 'general',
+                formatted: place.properties.formatted,
+              }
 
-                        setchose(selected);
+              setchose(selected)
 
-                        navigate("/ParkingChoose", {
-                          state: { selected },
-                        });
-}}
-            className="w-[450px] bg-white p-4 rounded-lg shadow hover:shadow-md transition cursor-pointer"
+              navigate('/ParkingChoose', {
+                state: { selected },
+              })
+            }}
+            className='w-full max-w-xl rounded-2xl bg-white p-4 shadow-lg transition hover:shadow-xl cursor-pointer'
           >
-            <h3>📍 {place.properties.name || "Parking"}</h3>
-            <p>{place.properties.formatted}</p>
+            <h3 className='text-lg font-semibold'>📍 {place.properties.name || 'Parking'}</h3>
+            <p className='text-sm text-slate-600'>{place.properties.formatted}</p>
           </div>
         ))}
       </div>
 
       {/* 🏙️ City Suggestions (ONLY when input is empty) */}
-      {query.trim() === "" && (
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-[130px] gap-y-[51px] gap-x-[20px] text-center">
-          {cities.map((city, idx) => (
-            <div
-              key={idx}
-              onClick={() => setquery(city.name)}   // ✅ fixed
-              className="flex flex-col items-center cursor-pointer group"
-            >
-              <div className="p-4 rounded-full bg-gray-100 text-gray-500 
-                              group-hover:text-green-500 group-hover:bg-green-100 transition">
-                {city.icon}
+      {query.trim() === '' && (
+        <div className='mt-10 px-4'>
+          <div className='mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4'>
+            {cities.map((city, idx) => (
+              <div
+                key={idx}
+                onClick={() => setquery(city.name)}
+                className='flex flex-col items-center justify-center gap-3 rounded-3xl border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:border-blue-300 hover:shadow-md cursor-pointer'
+              >
+                <div className='rounded-full bg-gray-100 p-4 text-gray-500 transition group-hover:text-green-500 group-hover:bg-green-100'>
+                  {city.icon}
+                </div>
+                <div className='text-gray-700 font-medium'>{city.name}</div>
               </div>
-
-              <div className="mt-3 text-gray-700 font-medium group-hover:text-green-600">
-                {city.name}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </>

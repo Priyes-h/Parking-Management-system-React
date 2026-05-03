@@ -16,7 +16,7 @@ function App() {
       <Navbar />
 
       {/* 👇 this pushes footer to bottom */}
-      <div className="flex-grow pb-[120px]">
+      <div className='grow pb-8'>
         <Routes>
           <Route path='/' element={<Home/>}></Route>   {/* 👈 also added this */}
           <Route path='/home' element={<Home/>}></Route>

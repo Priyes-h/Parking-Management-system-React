@@ -19,10 +19,10 @@ function ParkingChoose() {
   const removeTime = () => setDuration(prev => (prev > 1 ? prev - 1 : 1));
 
   return (
-    <div className="flex gap-10 ml-[182px] justify-evenly p-6">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-6 md:flex-row md:items-start md:justify-center">
 
       {/* LEFT SIDE → SLOTS */}
-      <div className="grid grid-cols-6 gap-2 h-fit">
+      <div className="w-full grid grid-cols-2 gap-3 sm:grid-cols-3 md:w-1/2 xl:grid-cols-4">
         {Array.from({ length: data.capacity }, (_, i) => {
           const slotName = `P-${i + 1}`;
 
@@ -43,7 +43,7 @@ function ParkingChoose() {
       </div>
 
       {/* RIGHT SIDE → DETAILS */}
-      <div className="max-w-md mx-auto bg-gradient-to-br from-[#1B365D] to-blue-800 rounded-3xl p-8 text-white shadow-2xl transition-all hover:scale-[1.02] border border-blue-400/30">
+      <div className="w-full md:w-1/2 bg-gradient-to-br from-[#1B365D] to-blue-800 rounded-3xl p-8 text-white shadow-2xl transition-all hover:scale-[1.02] border border-blue-400/30">
         <div className="mb-6">
           <h1 className="text-3xl font-extrabold tracking-tight mb-1">{data.name}</h1>
           <p className="text-blue-100 text-sm font-medium flex items-center gap-1">
