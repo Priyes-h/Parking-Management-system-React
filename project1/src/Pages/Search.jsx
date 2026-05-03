@@ -6,6 +6,15 @@ import { useNavigate } from "react-router-dom";
 function Seearch({ data }) {
   const navigate = useNavigate()
   let [query, setquery] = useState("")
+  const [choose,setchose] = useState({
+    name : null,
+    lat : null,
+    long : null,
+    capacity : null,
+    parkingFee : null,
+    parkingType : null,
+    Formatted : null,
+  })
 
   const filteredData = data.filter((place) =>
     place.properties.formatted
@@ -54,7 +63,23 @@ function Seearch({ data }) {
         {query && filteredData.map((place, i) => (
           <div
             key={place.properties.place_id || i}
-            onClick={() => navigate("/ParkingChoose")}
+        onClick={() => {
+                        const selected = {
+                          name: place.properties.name,
+                          lat: place.geometry.coordinates[1],
+                          long: place.geometry.coordinates[0],
+                          capacity: place.properties.datasource?.raw?.capacity || 10,
+                          parkingFee: place.properties.parking?.fee === false ? "Free" : 67,
+                          parkingType: place.properties.parking?.type || "general",
+                          formatted: place.properties.formatted,
+                        };
+
+                        setchose(selected);
+
+                        navigate("/ParkingChoose", {
+                          state: { selected },
+                        });
+}}
             className="w-[450px] bg-white p-4 rounded-lg shadow hover:shadow-md transition cursor-pointer"
           >
             <h3>📍 {place.properties.name || "Parking"}</h3>
