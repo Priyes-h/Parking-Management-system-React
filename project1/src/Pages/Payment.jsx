@@ -23,18 +23,53 @@ function Payment() {
 
   // form data change handler
 
+  async function handleSubmit(e) {
+  e.preventDefault()
+
+   // ❌ validation
+  if (
+    !data.Name ||
+    !data.Email ||
+    !data.VehicleNumber ||
+    !data.ParkingAddress ||
+    data.ParkingDuration <= 0
+  ) {
+    alert("Please fill all fields properly ❌")
+    return
+  }
+
+  console.log('submit', data)
+
+  try {
+    const res = await fetch("http://127.0.0.1:8000/save-trip", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+
+    const result = await res.json()
+    console.log("Saved:", result)
+
+    alert("Trip saved ✅")
+
+  } catch (error) {
+    console.error("Error:", error)
+    alert("Something went wrong ❌")
+  }
+}
+
   function handleChange(e) {
-    const { name, value } = e.target
-    setData(prev => ({ ...prev, [name]: value }))
-  }
+  const { name, value } = e.target
 
-
-  // form submit handler
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    console.log('submit', data)
-  }
+  setData(prev => ({
+    ...prev,
+    [name]:
+      name === "ParkingDuration" || name === "ParkingSpots"
+        ? Number(value) : value
+  }))
+}
 
   // calculate total fee
 
