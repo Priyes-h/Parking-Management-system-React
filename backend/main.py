@@ -14,6 +14,7 @@ class Trip(BaseModel):
     VehicleNumber: str
     ParkingAddress: str
     ParkingDuration: int
+    ParkingSpots: int 
 
 # API to save trip
 @app.post("/save-trip")
@@ -25,6 +26,12 @@ def save_trip(trip: Trip):
 @app.get("/trips")
 def get_trips():
     return prev_trips 
+
+@app.get("/last-trip")
+def get_last_trip():
+    if len(prev_trips) == 0:
+        return {}
+    return prev_trips[-1]  
 
 app.add_middleware(
     CORSMiddleware,
