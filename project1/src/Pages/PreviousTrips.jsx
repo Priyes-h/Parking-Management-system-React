@@ -1,8 +1,10 @@
 import React from "react"
- import { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 function PreviousTrips() {
   const [trips, setTrips] = useState([])
+  const navigate = useNavigate()
 
   // Fetch trips from backend
   useEffect(() => {
@@ -54,6 +56,7 @@ function PreviousTrips() {
                 <p><span className="font-medium">Vehicle:</span>{trip.VehicleNumber}</p>
                 <p><span className="font-medium">Address:</span>{trip.ParkingAddress}</p>
                 <p><span className="font-medium">Duration:</span>{trip.ParkingDuration} hrs</p>
+                <p><span className="font-medium">Spots:</span>{trip.ParkingSpots} hrs</p>
               </div>
 
               {/* Footer */}
@@ -65,6 +68,17 @@ function PreviousTrips() {
                   Completed
                 </span>
               </div>
+
+              <button
+                  onClick={() =>
+                    navigate("/payment", {
+                      state: trip,
+                    })
+                  }
+                  className="mt-3 w-full bg-sky-500 text-white py-1 rounded hover:bg-sky-600"
+                >
+                  Repeat Booking 
+                </button>
             </div>
           ))}
 

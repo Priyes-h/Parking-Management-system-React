@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 
+
 // use location is fetching data from search 
 
 function Payment() {
@@ -15,13 +16,40 @@ function Payment() {
   // form data state
 
   const [data, setData] = useState({
-    Name: "",
-    Email: "",
-    VehicleNumber: "",
-    ParkingAddress: "",
-    ParkingDuration: 0,
-    ParkingSpots: 1,
-  })
+  Name: location.state?.Name || "",
+  Email: location.state?.Email || "",
+  VehicleNumber: location.state?.VehicleNumber || "",
+  ParkingAddress: location.state?.ParkingAddress || "",
+  ParkingDuration: location.state?.ParkingDuration || 0,
+  ParkingSpots: location.state?.ParkingSpots || 1,
+})
+
+  //
+  useEffect(() => { if (!location.state) {
+                        fetchLastTrip();
+          }
+  }, [])
+
+const fetchLastTrip = async () => {
+  try {
+    const res = await fetch("http://127.0.0.1:8000/last-trip")
+    const lastTrip = await res.json()
+
+    if (lastTrip && Object.keys(lastTrip).length > 0) {
+      setData({
+        Name: lastTrip.Name || "",
+        Email: lastTrip.Email || "",
+        VehicleNumber: lastTrip.VehicleNumber || "",
+        ParkingAddress: lastTrip.ParkingAddress || "",
+        ParkingDuration: lastTrip.ParkingDuration || 0,
+        ParkingSpots: lastTrip.ParkingSpots || 1,
+      })
+    }
+  } catch (error) {
+    console.error("Error fetching last trip:", error)
+  }
+}
+  //
 
 
 
