@@ -1,5 +1,5 @@
 import React from 'react'
-import ParkNowLogo from '../Assests/ParkingLogo'
+import ParkNowLogo from '../../public/Assests/ParkingLogo'
 
 function Footer() {
   return (

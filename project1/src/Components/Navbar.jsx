@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import ParkNowLogo from '../Assests/ParkingLogo'
+import ParkNowLogo from '../../public/Assests/ParkingLogo'
 
 function Navbar() {
   return (
