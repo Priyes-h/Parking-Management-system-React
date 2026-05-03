@@ -6,7 +6,7 @@ The platform is designed to reduce parking congestion and provide a structured, 
 ---
 ## 🚀 Live Demo
 
-👉 [Click here to view the app]([https://parking-management-system-react-nine.vercel.app/])
+👉 [Click here to view the app](https://parking-management-system-react-nine.vercel.app/)
 
 ## 🚀 Phase 1 Features
 
