@@ -2,11 +2,11 @@ import React from 'react'
 
 function About() {
   const members = [
-  { src: '/src/Assests/developer1.jpeg', alt: 'Ayushmaan Da Developer' },
-  { src: '/src/Assests/developer2.jpeg', alt: 'Asmit Da Developer' },
-  { src: '/src/Assests/developer3.jpeg', alt: 'Priyesh Da Developer' },
-  { src: '/src/Assests/devGang.jpeg', alt: 'Developer Gang' },
-  { src: '/src/Assests/Rahul sir.jpeg', alt: 'Rahul sir' },
+  { src: '/Assests/developer1.jpeg', alt: 'Ayushmaan Da Developer' },
+  { src: '/Assests/developer2.jpeg', alt: 'Asmit Da Developer' },
+  { src: '/Assests/developer3.jpeg', alt: 'Priyesh Da Developer' },
+  { src: '/Assests/devGang.jpeg', alt: 'Developer Gang' },
+  { src: '/Assests/Rahul sir.jpeg', alt: 'Rahul sir' },
 ];
 // duplicate
 const loopMembers = [...members, ...members]
