@@ -1,11 +1,15 @@
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import React, { useState } from 'react'
 
-
-// parking fees
+// use location is fetching data from search 
 
 function Payment() {
   const parking = { fees: 67 }
+  const location = useLocation()
+  const parkingData = location.state?.selected;
+  const slot = location.state?.slot;
+  const duration = location.state?.duration;
 
 
   // form data state
@@ -21,12 +25,23 @@ function Payment() {
 
 
 
+useEffect(() => {
+  if (parkingData) {
+    setData(prev => ({
+      ...prev,
+      ParkingAddress: parkingData.formatted,
+      ParkingDuration: duration || 1,
+      ParkingSpots: 1, // default 1 spot
+    }));
+  }
+}, [parkingData, duration]);
+
   // form data change handler
 
   async function handleSubmit(e) {
   e.preventDefault()
 
-   // ❌ validation
+   // validation
   if (
     !data.Name ||
     !data.Email ||
@@ -62,7 +77,7 @@ function Payment() {
 
   function handleChange(e) {
   const { name, value } = e.target
-
+// checkin weather data is there and transfelling 
   setData(prev => ({
     ...prev,
     [name]:
@@ -73,9 +88,9 @@ function Payment() {
 
   // calculate total fee
 
-  const duration = data.ParkingDuration
-  const spots = data.ParkingSpots
-  const total = parking.fees * duration * spots
+const userDuration = data.ParkingDuration
+const spots = data.ParkingSpots
+const total = parking.fees * userDuration * spots
 
   return (
 

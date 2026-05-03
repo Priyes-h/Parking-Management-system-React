@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import Seearch from './Search'
 import { useNavigate } from 'react-router-dom'
+// import React from 'react'
 
 function Home() {
   const [data, setdata] = useState(null)
   const navigate = useNavigate()
+    const [choose,setchose] = useState({
+    name : null,
+    lat : null,
+    long : null,
+    capacity : null,
+    parkingFee : null,
+    parkingType : null,
+    Formatted : null,
+  })
   // fetches data fromapi 
   useEffect(() => {
     fetch("https://api.geoapify.com/v2/places?categories=parking&filter=circle:77.1025,28.7041,5000&apiKey=bc475bb3622d4f59bbf0253052ca93a7")
@@ -27,7 +37,23 @@ function Home() {
 
       {loopData.slice(7,19).map((place, i) => (
         <div className=' bg-white  pt-[35px] bg-red-600  hover:shadow-2xl rounded-xl hover:ring-2 hover:ring-inset hover:ring-fuchsia-300 shadow-[6px_6px_12px_rgba(0,0,0,0.15)]  p-6 transition flex shrink-0 h-[125px] ' > 
-          <div onClick={()=> navigate("/ParkingChoose")} key={i} className=''>
+          <div  onClick={() => {
+                        const selected = {
+                          name: place.properties.name,
+                          lat: place.geometry.coordinates[1],
+                          long: place.geometry.coordinates[0],
+                          capacity:  place.properties.datasource?.raw?.capacity || 10,
+                          parkingFee:  place.properties.parking?.fee === false ? "Free" : 67,
+                          parkingType: place.properties.parking?.type || "general",
+                          formatted: place.properties.formatted,
+                        };
+
+                        setchose(selected);
+
+                        navigate("/ParkingChoose", {
+                          state: { selected },
+                        });
+}} key={i} className=''>
           <h3> 📍{place.properties.name || "Parking"}</h3>
           <p> {place.properties.formatted}</p>
           </div>
